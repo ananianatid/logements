@@ -17,7 +17,12 @@ class BatimentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nom' => fake()->unique()->words(2, true),
+            'type_batiment' => fake()->randomElement(['Résidence', 'Cité universitaire', 'Bloc']),
+            'capacite_totale' => fake()->numberBetween(10, 100),
+            'disponibilite' => fake()->numberBetween(0, 10),
+            'adresse' => fake()->address(),
+            'description' => fake()->sentence(),
         ];
     }
 }

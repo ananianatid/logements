@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Etudiant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class JustificatifFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'etudiant_id' => Etudiant::factory(),
+            'type_justificatif' => fake()->word(),
+            'fichier_path' => fake()->filePath(),
+            'date_depot' => fake()->dateTime(),
+            'statut' => fake()->randomElement(['En attente', 'Validé', 'Rejeté']),
         ];
     }
 }

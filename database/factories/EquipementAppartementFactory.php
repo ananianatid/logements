@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Appartement;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class EquipementAppartementFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'appartement_id' => Appartement::factory(),
+            'nom_equipement' => fake()->word(),
+            'quantite' => fake()->numberBetween(1, 5),
+            'etat' => fake()->randomElement(['Neuf', 'Bon', 'Usé', 'Défectueux']),
         ];
     }
 }

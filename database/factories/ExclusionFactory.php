@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\AttributionLogement;
+use App\Models\Etudiant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,14 @@ class ExclusionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'etudiant_id' => Etudiant::factory(),
+            'attribution_id' => AttributionLogement::factory(),
+            'motif' => fake()->word(),
+            'description_motif' => fake()->sentence(),
+            'date_decision' => fake()->date(),
+            'statut_exclusion' => fake()->randomElement(['En cours', 'Effective', 'Annulée']),
+            'date_effective' => fake()->date(),
+            'agent_responsable' => fake()->name(),
         ];
     }
 }

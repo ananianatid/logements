@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Utilisateur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class LogActiviteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'utilisateur_id' => Utilisateur::factory(),
+            'action' => fake()->word(),
+            'table_concernee' => fake()->word(),
+            'enregistrement_id' => fake()->randomNumber(),
+            'details' => fake()->sentence(),
+            'ip_address' => fake()->ipv4(),
         ];
     }
 }

@@ -17,7 +17,16 @@ class EtudiantFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nom' => fake()->lastName(),
+            'prenoms' => fake()->firstName(),
+            'email' => fake()->unique()->safeEmail(),
+            'telephone' => fake()->phoneNumber(),
+            'sexe' => fake()->randomElement(['Masculin', 'Féminin']),
+            'situation_familiale' => fake()->randomElement(['Célibataire', 'Marié(e)', 'Avec enfants']),
+            'date_obtention_baccalaureat' => fake()->date(),
+            'matricule' => fake()->unique()->bothify('ETU-####'),
+            'handicap' => fake()->optional()->word(),
+            'photo_profil' => null,
         ];
     }
 }

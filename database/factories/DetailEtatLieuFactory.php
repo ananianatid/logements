@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\EtatLieu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class DetailEtatLieuFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'etat_lieu_id' => EtatLieu::factory(),
+            'element' => fake()->word(),
+            'etat' => fake()->randomElement(['Neuf', 'Bon', 'Moyen', 'Dégradé', 'Détérioré']),
+            'observations' => fake()->sentence(),
+            'photo_path' => fake()->filePath(),
         ];
     }
 }
