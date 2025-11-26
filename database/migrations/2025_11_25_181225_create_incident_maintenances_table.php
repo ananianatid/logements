@@ -11,9 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incident_maintenances', function (Blueprint $table) {
+        Schema::create('incidents_maintenance', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('appartement_id')->constrained('appartements')->onDelete('cascade');
+            $table->foreignId('etudiant_id')->nullable()->constrained('etudiants');
+            $table->string('type_incident', 100);
+            $table->text('description');
+            $table->enum('priorite', ['Faible', 'Moyenne', 'Haute', 'Urgente'])->nullable();
+            $table->enum('statut', ['Signalé', 'En cours', 'Résolu', 'Clôturé'])->default('Signalé');
+            $table->timestamp('date_signalement')->useCurrent();
+            $table->timestamp('date_resolution')->nullable();
+            $table->string('technicien_assigne', 100)->nullable();
+            $table->decimal('cout_reparation', 10, 2)->nullable();
             $table->timestamps();
+
+            $table->index('statut');
         });
     }
 
@@ -22,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incident_maintenances');
+        Schema::dropIfExists('incidents_maintenance');
     }
 };

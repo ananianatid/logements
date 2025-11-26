@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('utilisateurs', function (Blueprint $table) {
             $table->id();
+            $table->string('nom', 100);
+            $table->string('prenoms', 150);
+            $table->string('email', 150)->unique();
+            $table->string('password_hash', 255);
+            $table->enum('role', ['Admin', 'Agent', 'Technicien', 'Comptable']);
+            $table->boolean('actif')->default(true);
+            $table->timestamp('derniere_connexion')->nullable();
             $table->timestamps();
         });
     }

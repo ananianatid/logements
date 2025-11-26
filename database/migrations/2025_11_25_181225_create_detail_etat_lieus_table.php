@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_etat_lieus', function (Blueprint $table) {
+        Schema::create('details_etat_lieux', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('etat_lieu_id')->constrained('etats_lieux')->onDelete('cascade');
+            $table->string('element', 100);
+            $table->enum('etat', ['Neuf', 'Bon', 'Moyen', 'Dégradé', 'Détérioré'])->nullable();
+            $table->text('observations')->nullable();
+            $table->string('photo_path', 255)->nullable();
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_etat_lieus');
+        Schema::dropIfExists('details_etat_lieux');
     }
 };

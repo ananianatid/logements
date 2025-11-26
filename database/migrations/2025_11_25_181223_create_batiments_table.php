@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('batiments', function (Blueprint $table) {
             $table->id();
+            $table->string('nom', 100)->unique();
+            $table->enum('type_batiment', ['Résidence', 'Cité universitaire', 'Bloc'])->nullable();
+            $table->integer('capacite_totale');
+            $table->integer('disponibilite')->default(0);
+            $table->string('adresse', 255)->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

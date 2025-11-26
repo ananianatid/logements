@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipement_appartements', function (Blueprint $table) {
+        Schema::create('equipements_appartement', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('appartement_id')->constrained('appartements')->onDelete('cascade');
+            $table->string('nom_equipement', 100);
+            $table->integer('quantite')->default(1);
+            $table->enum('etat', ['Neuf', 'Bon', 'Usé', 'Défectueux'])->nullable();
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipement_appartements');
+        Schema::dropIfExists('equipements_appartement');
     }
 };

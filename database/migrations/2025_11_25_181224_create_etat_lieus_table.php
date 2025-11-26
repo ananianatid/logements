@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contrats_habitation', function (Blueprint $table) {
+        Schema::create('etats_lieux', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribution_id')->constrained('attributions_logement')->onDelete('cascade');
-            $table->string('numero_contrat', 50)->unique();
-            $table->string('fichier_contrat_path', 255)->nullable();
-            $table->date('date_signature')->nullable();
-            $table->decimal('caution_montant', 10, 2);
-            $table->boolean('caution_payee')->default(false);
-            $table->boolean('reglement_signe')->default(false);
+            $table->enum('type_etat', ['Entrée', 'Sortie']);
+            $table->date('date_etat');
+            $table->text('observation_generale')->nullable();
+            $table->string('agent_responsable', 100)->nullable();
+            $table->string('signature_etudiant_path', 255)->nullable();
+            $table->string('signature_agent_path', 255)->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contrats_habitation');
+        Schema::dropIfExists('etats_lieux');
     }
 };

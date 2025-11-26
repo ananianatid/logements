@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('exclusions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('etudiant_id')->constrained('etudiants')->onDelete('cascade');
+            $table->foreignId('attribution_id')->nullable()->constrained('attributions_logement');
+            $table->string('motif', 100);
+            $table->text('description_motif')->nullable();
+            $table->date('date_decision');
+            $table->enum('statut_exclusion', ['En cours', 'Effective', 'Annulée'])->default('En cours');
+            $table->date('date_effective')->nullable();
+            $table->string('agent_responsable', 100)->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('justificatifs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('etudiant_id')->constrained('etudiants')->onDelete('cascade');
+            $table->string('type_justificatif', 100);
+            $table->string('fichier_path', 255);
+            $table->timestamp('date_depot')->useCurrent();
+            $table->enum('statut', ['En attente', 'Validé', 'Rejeté'])->default('En attente');
         });
     }
 

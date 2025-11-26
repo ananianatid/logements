@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('antecedents_logement', function (Blueprint $table) {
+        Schema::create('dossiers_candidature', function (Blueprint $table) {
             $table->id();
             $table->foreignId('etudiant_id')->constrained('etudiants')->onDelete('cascade');
             $table->string('annee_universitaire', 20);
-            $table->enum('regularite_paiements', ['Excellent', 'Bon', 'Moyen', 'Mauvais'])->nullable();
-            $table->boolean('troubles_colocation')->default(false);
-            $table->text('description_troubles')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('date_soumission')->useCurrent();
+            $table->enum('statut', ['En cours', 'Validé', 'Rejeté', 'En attente paiement', 'Attribué'])->default('En cours');
+            $table->decimal('score_selection', 5, 2)->nullable();
+            $table->text('commentaire_admin')->nullable();
+            $table->timestamps();
+
+            $table->index('statut');
         });
     }
 
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('antecedents_logement');
+        Schema::dropIfExists('dossiers_candidature');
     }
 };
