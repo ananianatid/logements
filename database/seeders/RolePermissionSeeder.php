@@ -47,5 +47,17 @@ class RolePermissionSeeder extends Seeder
 
         $admin = Role::firstOrCreate(['name' => 'admin']);
         $admin->givePermissionTo(Permission::all());
+
+        $comptable = Role::firstOrCreate(['name' => 'comptable']);
+        $comptable->givePermissionTo([
+            'lire paiement',
+            'ajouter paiement',
+            'modifier paiement',
+            'supprimer paiement',
+            'lire contrat_habitation',
+            'lire etudiant',
+            'lire appartement',
+            'lire batiment',
+        ]);
     }
 }
