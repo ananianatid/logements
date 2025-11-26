@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolePermissionSeeder extends Seeder
 {
@@ -12,12 +14,38 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Permission::create(['name' => 'lire etudiant','guard_name' => 'web']);
-        Permission::create(['name' => 'ajouter etudiant', 'guard_name' => 'web']);
-        Permission::create(['name' => 'modifier etudiant', 'guard_name' => 'web']);
-        Permission::create(['name' => 'supprimer etudiant', 'guard_name' => 'web']);
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $admin = Role::create(['name' => 'admin']);
-        $adminRole->givePermissionTo(Permission::all());
+        $resources = [
+            'user',
+            'appartement',
+            'batiment',
+            'etudiant',
+            'utilisateur',
+            'antecedent_logement',
+            'attribution_logement',
+            'contrat_habitation',
+            'dossier_candidature',
+            'equipement_appartement',
+            'justificatif',
+            'detail_etat_lieu',
+            'etat_lieu',
+            'exclusion',
+            'incident_maintenance',
+            'log_activite',
+            'paiement',
+        ];
+
+        $actions = ['lire', 'ajouter', 'modifier', 'supprimer'];
+
+        foreach ($resources as $resource) {
+            foreach ($actions as $action) {
+                Permission::firstOrCreate(['name' => "{$action} {$resource}", 'guard_name' => 'web']);
+            }
+        }
+
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $admin->givePermissionTo(Permission::all());
     }
 }
