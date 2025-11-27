@@ -1,0 +1,110 @@
+@baseUrl = http://localhost:8000/api
+@email = test@example.com
+@password = password
+@token = {{login.response.body.token}}
+
+### Login
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+
+### Get User
+GET {{baseUrl}}/user
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### --- BATIMENTS ---
+
+### List Batiments
+GET {{baseUrl}}/batiments
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Create Batiment
+POST {{baseUrl}}/batiments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nom": "Résidence Les Lilas",
+    "type_batiment": "Résidence",
+    "capacite_totale": 50,
+    "adresse": "10 Rue des Fleurs",
+    "description": "Une belle résidence calme."
+}
+
+### Get Batiment
+@batimentId = 1
+GET {{baseUrl}}/batiments/{{batimentId}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Update Batiment
+PUT {{baseUrl}}/batiments/{{batimentId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "capacite_totale": 55,
+    "description": "Capacité augmentée après rénovation."
+}
+
+### Delete Batiment
+DELETE {{baseUrl}}/batiments/{{batimentId}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### --- APPARTEMENTS ---
+
+### List Appartements
+GET {{baseUrl}}/appartements
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Create Appartement
+POST {{baseUrl}}/appartements
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "batiment_id": 1,
+    "numero": "A101",
+    "etage": 1,
+    "type_appartement": "Studio",
+    "capacite_personnes": 1,
+    "disponibilite": true,
+    "etat": "Neuf",
+    "superficie": 20.5,
+    "loyer_mensuel": 450.00
+}
+
+### Get Appartement
+@appartementId = 1
+GET {{baseUrl}}/appartements/{{appartementId}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Update Appartement
+PUT {{baseUrl}}/appartements/{{appartementId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "loyer_mensuel": 460.00,
+    "etat": "Bon"
+}
+
+### Delete Appartement
+DELETE {{baseUrl}}/appartements/{{appartementId}}
+Authorization: Bearer {{token}}
+Accept: application/json

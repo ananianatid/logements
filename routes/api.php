@@ -27,3 +27,8 @@ Route::post('/login', function (Request $request) {
         'message' => 'Invalid credentials'
     ], 401);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('batiments', \App\Http\Controllers\API\BatimentController::class);
+    Route::apiResource('appartements', \App\Http\Controllers\API\AppartementController::class);
+});
