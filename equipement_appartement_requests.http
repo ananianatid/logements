@@ -1,0 +1,58 @@
+### Login to get token
+POST http://localhost/api/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+
+### Set token variable (replace with actual token from login response)
+@token = YOUR_TOKEN_HERE
+
+###
+
+### List all equipement appartements
+GET http://localhost/api/equipement-appartement
+Authorization: Bearer {{token}}
+
+###
+
+### Create a new equipement appartement
+POST http://localhost/api/equipement-appartement
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "appartement_id": 1,
+  "nom_equipement": "Lit",
+  "quantite": 2,
+  "etat": "Neuf"
+}
+
+###
+
+### Show a specific equipement appartement
+GET http://localhost/api/equipement-appartement/1
+Authorization: Bearer {{token}}
+
+###
+
+### Update an equipement appartement
+PUT http://localhost/api/equipement-appartement/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nom_equipement": "Lit double",
+  "quantite": 1,
+  "etat": "Bon"
+}
+
+###
+
+### Delete an equipement appartement
+DELETE http://localhost/api/equipement-appartement/1
+Authorization: Bearer {{token}}
+
+###

@@ -9,9 +9,12 @@ class StoreEquipementAppartementRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +25,10 @@ class StoreEquipementAppartementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'appartement_id' => ['required', 'exists:appartements,id'],
+            'nom_equipement' => ['required', 'string', 'max:255'],
+            'quantite' => ['required', 'integer', 'min:1'],
+            'etat' => ['required', 'string', 'max:255'],
         ];
     }
 }

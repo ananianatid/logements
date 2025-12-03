@@ -13,7 +13,7 @@ class EquipementAppartementController extends Controller
      */
     public function index()
     {
-        //
+        return EquipementAppartement::all();
     }
 
     /**
@@ -29,7 +29,9 @@ class EquipementAppartementController extends Controller
      */
     public function store(StoreEquipementAppartementRequest $request)
     {
-        //
+        $equipementAppartement = EquipementAppartement::create($request->validated());
+
+        return response()->json($equipementAppartement, 201);
     }
 
     /**
@@ -37,7 +39,7 @@ class EquipementAppartementController extends Controller
      */
     public function show(EquipementAppartement $equipementAppartement)
     {
-        //
+        return $equipementAppartement;
     }
 
     /**
@@ -53,7 +55,9 @@ class EquipementAppartementController extends Controller
      */
     public function update(UpdateEquipementAppartementRequest $request, EquipementAppartement $equipementAppartement)
     {
-        //
+        $equipementAppartement->update($request->validated());
+
+        return $equipementAppartement;
     }
 
     /**
@@ -61,6 +65,8 @@ class EquipementAppartementController extends Controller
      */
     public function destroy(EquipementAppartement $equipementAppartement)
     {
-        //
+        $equipementAppartement->delete();
+
+        return response()->noContent();
     }
 }

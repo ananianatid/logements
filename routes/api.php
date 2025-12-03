@@ -33,4 +33,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('appartements', \App\Http\Controllers\API\AppartementController::class);
     Route::apiResource('etudiants', \App\Http\Controllers\API\EtudiantController::class);
     Route::apiResource('dossiers-candidature', \App\Http\Controllers\API\DossierCandidatureController::class);
+    Route::apiResource('equipement-appartement', \App\Http\Controllers\EquipementAppartementController::class);
 });
