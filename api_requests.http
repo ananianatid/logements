@@ -108,3 +108,91 @@ Accept: application/json
 DELETE {{baseUrl}}/appartements/{{appartementId}}
 Authorization: Bearer {{token}}
 Accept: application/json
+
+### --- ETUDIANTS ---
+
+### List Etudiants
+GET {{baseUrl}}/etudiants
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Create Etudiant
+POST {{baseUrl}}/etudiants
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nom": "Dupont",
+    "prenoms": "Jean",
+    "email": "jean.dupont@example.com",
+    "telephone": "+33612345678",
+    "sexe": "Masculin",
+    "situation_familiale": "Célibataire",
+    "date_obtention_baccalaureat": "2023-07-01",
+    "matricule": "ETU2023001",
+    "handicap": "Aucun"
+}
+
+### Get Etudiant
+@etudiantId = 1
+GET {{baseUrl}}/etudiants/{{etudiantId}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Update Etudiant
+PUT {{baseUrl}}/etudiants/{{etudiantId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "telephone": "+33698765432"
+}
+
+### Delete Etudiant
+DELETE {{baseUrl}}/etudiants/{{etudiantId}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### --- DOSSIERS CANDIDATURE ---
+
+### List Dossiers
+GET {{baseUrl}}/dossiers-candidature
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Create Dossier
+POST {{baseUrl}}/dossiers-candidature
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "etudiant_id": 1,
+    "annee_universitaire": "2025-2026",
+    "statut": "En cours"
+}
+
+### Get Dossier
+@dossierId = 1
+GET {{baseUrl}}/dossiers-candidature/{{dossierId}}
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Update Dossier
+PUT {{baseUrl}}/dossiers-candidature/{{dossierId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "statut": "Validé",
+    "score_selection": 15.5,
+    "commentaire_admin": "Dossier complet."
+}
+
+### Delete Dossier
+DELETE {{baseUrl}}/dossiers-candidature/{{dossierId}}
+Authorization: Bearer {{token}}
+Accept: application/json

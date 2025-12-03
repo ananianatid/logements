@@ -31,4 +31,6 @@ Route::post('/login', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('batiments', \App\Http\Controllers\API\BatimentController::class);
     Route::apiResource('appartements', \App\Http\Controllers\API\AppartementController::class);
+    Route::apiResource('etudiants', \App\Http\Controllers\API\EtudiantController::class);
+    Route::apiResource('dossiers-candidature', \App\Http\Controllers\API\DossierCandidatureController::class);
 });
